@@ -63,5 +63,5 @@ It is not necessary to start the Celery worker to test email.
 The public and private keyrings used to run tests are in `canary/test/homedir`. The keyrings already include the public and private keys required to run the test, but ASCII-armored versions of the keys are also available in `canary/test/files` in case you accidentally delete the keyrings and need to reimport the keys. The passphrase for `test.sec` is `test`.
 
 ## Things to Work On
-See the list of [TODOS](https://github.com/taravancil/canary/TODOS.md) or the [issue tracker](https://github.com/taravancil/canary/issues).
+See the list of [TODOS](https://github.com/taravancil/canary/blob/master/TODOS.txt) or the [issue tracker](https://github.com/taravancil/canary/issues).
 
