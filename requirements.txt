@@ -1,0 +1,7 @@
+beautifulsoup4
+celery
+flask
+Flask-Mail
+gnupg
+itsdangerous
+SQLAlchemy

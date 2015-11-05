@@ -1,0 +1,143 @@
+form {
+  display: inline-block;
+  width: 100%;
+
+  h3 {
+    color: $color-copy-accent;
+    font-weight: bold;
+  }
+}
+
+.module.form {
+  background: $lightest-main;
+  border: 1px solid $lighter-main;
+
+  input[name=fingerprint], input[name=decrypted], input[name=email] {
+    font-size: 1em;
+    font-family: monospace;
+    width: 290px;
+  }
+}
+
+fieldset {
+  background: $color-bg;
+  border: 1px solid $lightest-grey;
+  padding: .5em 1.5em 1em 1.5em;
+
+  p {
+    margin: 0;
+  }
+}
+
+input, textarea {
+  @include border-radius(2px, 2px, 2px, 2px);
+  padding: 1em;
+  border: 1px solid $lightest-grey;
+  margin: 1em .5em;
+  color: lighten($color-copy, 5%);
+  font-size: .9em;
+  background: $white;
+}
+
+textarea {
+  font-family: monospace;
+  resize: none;
+  box-shadow: inset 0 0 1px 0 $lightest-grey;
+}
+
+input[type=number] {
+  text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btn, button {
+  @extend %transition;
+  @include border-radius(4px, 4px, 4px, 4px)
+  padding: 1em 1.2em;
+  font-size: .7em;
+    
+  &:hover, &:focus {
+    cursor: pointer;
+  }
+
+  &.secondary {
+    transition-property: border;
+    color: $light-grey;
+    border: 1px solid $lightest-grey;
+    background: $color-bg;
+    
+    &:hover, &:focus {
+      border-color: $light-grey;
+    }
+  }
+
+  &.primary {
+    color: $color-copy-accent;
+    border: 1px solid $lighter-main;
+    transition-property: border;
+
+    &:hover {
+      border-color: $color-copy-accent;
+      color: $color-copy-accent;
+    }
+  }
+}
+
+a.btn {
+  padding: .8em;
+  font-family: Helvetica, sans-serif;
+  font-size: .7em;
+  text-decoration: none;
+
+  &.primary {
+    padding: .8em;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: $white;
+  }
+}
+
+.confirmation {
+  visibility: hidden;
+  font-size: .9em;
+  float: right;
+  clear: none;
+
+  * {
+    font-style: italic;
+  }
+
+  a {
+    margin-left: .7em;
+  }
+
+  &:target {
+    visibility: visible;
+    clear: both;
+  }
+
+  .btn {
+    @extend %font;
+    @extend %link;
+    font-size: 1em;
+    border: none;
+    padding-right: 0;
+    margin-right: 0;
+  }
+}
+
+#copy-status {
+  font-family: Helvetica, sans-serif;
+  font-size: .7em;
+  font-weight: 200;
+  font-style: italic;
+  padding: 1em;
+}
+

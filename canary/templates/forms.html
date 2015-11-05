@@ -1,0 +1,11 @@
+{% macro input(name, id, attrs, class, value='', type='text') -%}
+<input id="{{ id }}" type="{{ type }}" class="{{ class }}" value="{{ value }}" name="{{ name }}" {{ attrs }} />
+{%- endmacro %}
+
+{% macro label(for, attrs, class, value='') -%}
+<label for="{{ for }}" class="{{ class }}" {{ attrs }}>{{ value }}</label>
+{%- endmacro %}
+
+{% macro textarea(name, attrs, value='', rows=17, cols=63) -%}
+<textarea name="{{ name }}" {{ attrs }} cols="{{ cols }}" rows="{{ rows }}" spellcheck="false">{{ value }}</textarea>
+{%- endmacro %}

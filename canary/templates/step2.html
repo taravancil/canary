@@ -1,0 +1,11 @@
+{% import "forms.html" as forms %}
+
+<form name="step2" action="/canary/{{ canary.sigid_base64 }}" method="POST" class="form module rounded-subtle">
+  {{ forms.input('_csrf_token', type='hidden', value=csrf_token()) }}
+
+  {{ forms.label(for='decrypted', value='Decrypted Text', attrs='required') }}
+  {{ forms.input('decrypted', type='text', attrs='required') }}
+  {{ forms.input('submit', type='submit', value='Submit', class='btn primary') }}
+</form>
+<script src="{{ config.URL }}/static/js/min.copy.js"></script>
+<script src="{{ config.URL }}/static/js/min.step2.js"></script>

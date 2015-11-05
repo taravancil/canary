@@ -1,0 +1,22 @@
+%link {
+  @extend %transition;
+  text-decoration: underline;
+  padding: 0 .2em;
+  color: inherit;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    color: $color-copy-accent;
+  }
+}
+
+body {
+  background: $color-bg;
+  line-height: 1.8;
+
+  a {
+    @extend %link;
+  }
+}
+

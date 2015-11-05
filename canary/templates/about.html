@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+{% block heading %}<h1>About</h1>{% endblock %}
+{% block container %}<div class="container grid">{% endblock %}
+
+{% block main %}
+<div class="module small rounded-subtle">
+    <h2>About Canary</h2>
+
+    <p>Canary is an application for publishing and managing cryptographically-verified <em>warrant canary</em>-like statements on a regular schedule.</p>
+
+    <p>A canary is PGP-signed message that is republished on a regular basis. Canary allows you to easily share with others how often to expect your canary to be republished, and makes it easy for you to republish your canary on schedule by sending you periodic reminder emails. Others can also watch your canary so they'll receive an alert when it's overdue, republished, or deleted entirely.</p>
+
+    <h3>Warrant Canaries</h3>
+
+    <p>Canary operates under the notion that while governments compel silence by issuing gag orders, it's much more difficult to compel speech, especially <em>false</em> speech.</p>
+
+    <p>From <a href="https://canarywatch.org">canarywatch.org</a>:
+        <blockquote class="rounded-subtle">A <em>warrant canary</em> is a colloquial term for a regularly published statement that a service provider has not received legal process (like a national security letter) that it would be prohibited from disclosing to the public. Once a service provider does receive legal process, the speech prohibition goes into place, and the provider no longer makes the statement about the number of such process received.</blockquote>
+    </p>
+
+    <p><a href="{{ config.URL }}/new">Publish a canary</a> or read the <a href="{{ config.URL }}/faq">FAQ</a> to learn more.</p>
+</div>
+{% endblock %}

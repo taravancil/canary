@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Publish a Canary{% endblock %}
+{% block heading %}<h1>Publish a Canary</h1>{% endblock %}
+{% block sidebar %}{% endblock %}
+
+{% block main %}
+  {% if canary %}
+    {% if canary.ciphertext %}
+       <div class="module">
+        <h2>Decrypt the Challenge</h2>
+          <p>If the information below is correct, decrypt this secret to submit your canary.</p>
+          <pre id="ciphertext" class="block ciphertext">{{ canary.ciphertext }}</pre>
+
+          {% import "forms.html" as forms %}
+          {{ forms.input('copyButton', id='copy-button', type='button', value='Copy to Clipboard', attrs='disabled', class='btn secondary') }}
+          <span id="copy-status">
+            <noscript>*JavaScript required for clipboard access</noscript>
+          </span>
+      </div>
+
+      {% include "step2.html" %}
+      <div class="module">
+        <p>
+        <h2>Canary Details</h2>
+          <ul class="canary-info">
+            <li>Signed by {{ canary.uid }}</li>
+            <li>Signed with key 0x{{ canary.keyid }}</li>
+            <li>Fingerprint: <pre class="fp">{{ canary.fp }}</pre></li>
+            <li>Posted every {{ canary.frequency }} {{ canary.freq_type }}s</li>
+        </p>
+
+        <pre class="block">{{ canary.text }}</pre>
+      </div>
+
+    {% endif %}
+  {% else %}
+    {% include "step1.html" %}
+  {% endif %}
+{% endblock %}

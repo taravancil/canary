@@ -1,0 +1,8 @@
+canary/config.py
+*.pyc
+*.db
+canary/homedir/
+canary/canaries/
+canary/static/
+venv/
+celerybeat-schedule

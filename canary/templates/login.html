@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% import "forms.html" as forms %}
+
+{% block title %}Login{% endblock %}
+{% block heading %}<h1>Login</h1>{% endblock %}
+{% block sidebar %}{% endblock %}
+
+{% block main %}
+{% if ciphertext %}
+    <p>Decrypt this message to log in.</p>
+    <pre id="ciphertext">{{ ciphertext }}</pre>
+    {{ forms.input('copyButton', id='copy-button', type='button', value='Copy to Clipboard', attrs='disabled', class='btn secondary') }}
+    <span id="copy-status">
+    <noscript>*JavaScript required for clipboard access</noscript>
+    </span>    
+
+    <form name="login" action="/login/{{ session.fp }}" method="POST" class="form module rounded-subtle">
+    {{ forms.input('_csrf_token', type='hidden', value=csrf_token()) }}
+
+    {{ forms.label(for='decrypted', value='Decrypted Text', attrs='required') }}
+    {{ forms.input('decrypted', type='text', attrs='required') }}
+    {{ forms.input('submit', type='submit', value='Submit', class='primary btn') }}
+    </form>
+    <script src="{{ config.URL }}/static/js/min.copy.js"></script>
+{% else %}
+    <form name="login" action="/login" method="POST" class="form module rounded-subtle">
+    {{ forms.input('_csrf_token', type='hidden', value=csrf_token()) }}
+
+    {{ forms.label(for='fingerprint', value='Your key fingerprint', attrs='required') }}
+    {{ forms.input('fingerprint', type='text', attrs='required') }}
+    {{ forms.input('submit', type='submit', value='Submit', class='btn primary') }}
+    </form>
+{% endif %}
+{% endblock %}

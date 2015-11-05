@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "forms.html" as forms %}
+
+{% block container %}<div class="container grid">{% endblock %}
+
+{% block title %}Canary {{ canary.sigid_base64 }}{% endblock %}
+{% block heading %}<h1>Canary Details</h1>{% endblock %}
+{% block main %}
+  {% if session.uid and session.uid == canary.user.id %}
+    {% include "edit.html" %}
+  {% endif %}
+  <div class="module rounded-subtle">
+    <pre>{{ text }}</pre>
+  </div>
+{% endblock %}
+
+{% block sidebar %}
+  {% if session.uid and session.uid == canary.user.id %}
+    {% include "sidebar.html" %}
+  {% endif %}
+  {% include "details.html" %}
+{% endblock %}

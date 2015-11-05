@@ -1,0 +1,37 @@
+{% import "forms.html" as forms %}
+
+<form name="step1" action="/new" method="POST" class="module rounded-subtle">
+  <h3>Publish a Canary</h3>
+  {{ forms.input('_csrf_token', value=csrf_token(), type='hidden') }} 
+  {{ forms.label('signedMessage', value='Paste a PGP-signed message') }}
+  {% if canary %}
+    {% with text = canary.text %}
+      {{ forms.textarea('signedMessage', value=text, attrs='required') }}
+    {% endwith %}
+  {% else %}
+      {{ forms.textarea('signedMessage', attrs='required') }}
+  {% endif %}
+
+  <fieldset class="rounded-subtle">
+    <legend>How often would you like to post your canary?</legend>
+    <p>Post my canary every
+    {{ forms.label('frequencyNum', value='How many?', class='hidden') }}
+    {{ forms.input('frequencyNum', type='number', attrs='required min=1 max=100') }}
+
+    <radiogroup name="freqOptions" id="freq-options">
+      {{ forms.input('frequency', type='radio', id='frequency', value='day', attrs='required') }}
+      {{ forms.label('daily', value='Days') }}
+
+      {{ forms.input('frequency', type='radio', value='week', attrs='radio') }}
+      {{ forms.label('weekly', value='Weeks') }}
+
+      {{ forms.input('frequency', type='radio', value='month', attrs='required') }}
+      {{ forms.label('monthly', value='Months') }}
+    </radiogroup>
+    </p>
+  </fieldset>
+  
+  {{ forms.input('submit', type='submit', value='Next Step', class='btn secondary right') }}
+</form>
+
+<script src="{{ config.URL }}/static/js/min.step1.js"></script>

@@ -1,0 +1,53 @@
+$breakpoints: (
+  show-grid: 1200px,
+  shrink-contain: 800px,
+  shrink-contain-second: 900px,
+  shrink-form: 1000px,
+);
+
+@mixin breakpoint($bp) {
+  @media screen and (min-width: map-get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+.container {
+  margin: auto;
+  max-width: 1200px;
+  padding: 1em;
+
+  @include breakpoint(shrink-contain) {
+    width: 90%;
+  }
+  @include breakpoint(shrink-contain-second) {
+    width: 85%;
+  }
+  
+  &.grid {
+    @include breakpoint(show-grid) {
+      width: 100%;
+    }
+  }
+}
+
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+[class*='col-'] {
+  float: left;
+  width: 100%;
+}
+
+@include breakpoint(show-grid) {
+  .col-left {
+    width: 58%;
+    margin-right: 4%;
+  }
+  .col-right {
+    width: 38%;
+  }
+}
+

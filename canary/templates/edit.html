@@ -1,0 +1,56 @@
+{% import "forms.html" as forms %}
+
+<div class="module small rounded-subtle">
+<form name="editCanary" action="/canary/{{ canary.sigid_base64 }}/edit" method="POST" class="form">
+  <h2>Manage Canary</h2>
+  {{ forms.input('_csrf_token', value=csrf_token(), type='hidden') }} 
+  <fieldset class="rounded-subtle">
+    <legend>Update Frequency</legend>
+    <p>Post my canary every
+    {% with freq = canary.frequency %}
+      {{ forms.input('frequencyNum', type='number', attrs='required min=1 max=100') }}
+    {% endwith %}
+
+    <radiogroup name="freqOptions" id="freq-options">
+      {{ forms.input('frequency', type='radio', id='frequency', value='day', attrs='required') }}
+      {{ forms.label('daily', value='Days') }}
+
+      {{ forms.input('frequency', type='radio', value='week', attrs='radio') }}
+      {{ forms.label('weekly', value='Weeks') }}
+
+      {{ forms.input('frequency', type='radio', value='month', attrs='required') }}
+      {{ forms.label('monthly', value='Months') }}
+    </radiogroup>
+    </p>
+  </fieldset>
+  
+  {{ forms.input('edit', type='submit', value='Update canary', class='btn secondary right') }}
+  </form>
+
+  <form name="publishCanary" action="/canary/{{ canary.sigid_base64 }}/publish" method="POST">
+    <h3>Republish Canary</h3>
+    <p>This canary is scheduled to be published in
+    {% with diff = canary.frequency - time_since(canary.date_last_updated) %}
+      {% if diff == 1 %}1 day
+      {% elif diff < 30 and diff != 1 %}{{ diff }} days
+      {% elif diff >=30 %}{{ diff // 7 }} weeks
+      {% endif %}, but you can republish it at any time.</p>
+    {% endwith %}
+    {{ forms.input('_csrf_token', value=csrf_token(), type='hidden') }} 
+    {{ forms.input('publish', type='submit', value='Republish this canary', class='btn secondary right') }}
+  </form>
+
+  <form id="deleteCanary" name="deleteCanary" action="/canary/{{ canary.sigid_base64 }}/delete" method="POST">
+    {{ forms.input('_csrf_token', value=csrf_token(), type='hidden') }} 
+    <h3>Delete Canary</h3>
+    <p>If you delete this canary, you won't be able to recover it, and the canary's watchers will be notified.</p>
+    <a href="{{ config.URL }}/canary/{{ canary.sigid_base64 }}#delete" class="btn primary right">
+      Delete This Canary
+    </a>
+    <p id="delete" class="confirmation">
+      Delete this canary?
+      <a href="#deleteCanary">Cancel</a>
+      {{ forms.input('delete', type='submit', value='Yes, delete this canary', class='btn') }}
+    </p>
+  </form>
+</div>

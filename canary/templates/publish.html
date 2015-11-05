@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Republish Your Canary{% endblock %}
+{% block heading %}<h1>Republish Your Canary</h1>{% endblock %}
+
+{% block container %}<div class="container grid">{% endblock %}
+{% block main %}
+  <p>Decrypt the challenge to republish your canary.</p>
+  <pre id="ciphertext">{{ ciphertext }}</pre> 
+  {% import "forms.html" as forms %}
+  {{ forms.input('copyButton', id='copy-button', type='button', value='Copy to Clipboard', attrs='disabled', class='btn secondary') }}
+  <span id="copy-status">
+    <noscript>*JavaScript required for clipboard access</noscript>
+  </span>
+
+  <form name="publishCanary" action="/canary/{{ canary.sigid_base64 }}/publish" method="POST" class="form module">
+    {{ forms.input('_csrf_token', type='hidden', value=csrf_token()) }}
+    {{ forms.label(for='decrypted', value='Decrypted Text', attrs='required') }}
+    {{ forms.input('decrypted', type='text', attrs='required') }}
+    {{ forms.input('publish', type='submit', value='Submit', class='btn primary') }}
+  </form>
+
+  <script src="{{ config.URL }}/static/js/min.copy.js"></script>
+{% endblock %}
+
+{% block sidebar %}
+  {% include "details.html" %}
+{% endblock %}

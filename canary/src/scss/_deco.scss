@@ -1,0 +1,61 @@
+@mixin border-radius($tl, $tr, $br, $bl) {
+  -webkit-border-radius: $tl $tr $br $bl;
+  -moz-border-radius: $tl $tr $br $bl;
+  border-radius: $tl $tr $br $bl;
+}
+
+%transition {
+  transition-duration: .1s;
+}
+
+.rounded {
+  @include border-radius(4px, 4px, 4px, 4px)
+}
+
+.rounded-subtle {
+  @include border-radius(2px, 2px, 2px, 2px)
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.hidden {
+  display: none;
+}
+
+pre.fp {
+  background: $color-bg;
+  border: 1px solid $lightest-grey;
+  margin: 0 .3em;
+  padding: 0 .3em;
+  font-size: .9em;
+  display: inline-block;
+  text-transform: uppercase;
+  @include border-radius(2px, 2px, 2px, 2px);
+}
+
+blockquote {
+  font-style: italic;
+  font-size: .9em;
+  background: $lightest-main;
+  border: 1px solid $lighter-main;
+  padding: 1.5em;
+}
+
+em {
+  font-weight: bold;
+}
+
+.intro {
+  font-size: 1.2em;
+}
+
+h2 {
+  color: $color-copy-accent;
+}
+

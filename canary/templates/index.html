@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block heading %}
+    <h1>Canary</h1>
+{% endblock %}
+
+{% block container %}<div class="container home grid">{% endblock %}
+
+{% block main %}
+  <p class="intro">
+    {{ config.INTRO_TEXT }} <a href="{{ config.URL }}/about">Learn more</a>.
+  </p>
+  {% include "step1.html" %}
+{% endblock %}

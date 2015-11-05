@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ{% endblock %}
+{% block heading %}<h1>Frequently Asked Questions</h1>{% endblock %}
+{% block container %}<div class="container grid">{% endblock %}
+{% block main %}
+<div class="module small rounded-subtle">
+  <h2 id ="what-is-canary">What is Canary?</h2>
+
+    <p>Canary is an application for publishing and managing cryptographically-verified <em>warrant canary</em>-like statements on a regular schedule. Learn more about warrant canaries at <a href="https://canarywatch.org">canarywatch.org</a>.</p>
+
+  <h2 id="publish-a-canary">How do I publish a canary?</h2>
+
+    <p>To publish a canary, you need a PGP or GPG key, a message signed with that key, and the passphrase for that key.</p>
+
+    <p>After submitting a signed message, you must decrypt a PGP-encrypted challenge in order to prove ownership of the key with which the message was signed. If you successfully decrypt the challenge, your canary will be published.</p>
+
+    <p>After publishing a canary, you'll receive periodic email reminders (you choose how often) to republish your canary. People can also follow your canary and receive alerts when it is republished, deleted, or hasn't been republished as expected.</p>
+
+  <h2 id="edit-canary">Can I edit my canary after I publish it?</h2>
+
+    <p>You cannot edit the content of your canary. You can, however, adjust how often you'll be reminded to republish your canary, or you can delete your canary altogether.</p>
+
+  <h2 id="unauthorized-canary">A canary was published with my key, but I didn't publish it. What do I do?</h2>
+
+    <p>If a canary is posted with your key, but without your authorization, that means your private key and passphrase were compromised, Canary was compromised, or both.</p>
+
+    <p>If this happens, you should take steps to <a href="https://www.gnupg.org/gph/en/manual/c14.html#REVOCATION">revoke your public key</a>, <a href="https://www.gnupg.org/gph/en/manual/c14.html#AEN25">generate a new keypair</a>, and notify others that you are transitioning keys. Do <em>not</em> reuse the compromised passphrase for your new keypair, and be sure to use a strong passphrase (preferably a Diceware passphrase). <a href="https://theintercept.com">The Intercept</a> published a helpful <a href="https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/">article about generating and remembering Diceware passphrases</a>.</p>
+
+</div>
+{% endblock %}

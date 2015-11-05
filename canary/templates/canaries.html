@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Active Canaries{% endblock %}
+{% block heading %}<h1>Active Canaries</h1>{% endblock %}
+
+{% block main %}
+  <div class="module canaries">
+  {% if users %}
+    <ul>
+    {% for user in users %}
+    {% if user.canaries %}
+      <li>
+        <h2><a href="{{ config.URL }}/user/{{ user.fingerprint }}">
+          {{ user.uid }}
+        </a></h2>
+      </li>
+      {% with count = user.canaries|count %}
+      <h3>
+        {% if count > 1 %}{{ count }} active canaries</h3>
+        {% else %} {{ count }} active canary</h3>
+        {% endif %}
+      {% endwith %}
+      <ul>
+      {% for canary in user.canaries|sort(attribute='date_posted', reverse=True) %}
+        <li>
+          <a href="{{ config.URL }}/canary/{{ canary.sigid_base64 }}">
+            Published: {{ canary.date_posted.strftime('%Y-%m-%d') }}
+          </a>
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No active users.</p>
+  {% endif %}
+</div>
+{% endblock %}
+      

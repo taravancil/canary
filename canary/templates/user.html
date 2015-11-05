@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user.uid }}{% endblock %}
+
+{% block heading %}
+  {% if session.logged_in and session.fingerprint == user.fingerprint %}
+    <h1>Your Canaries</h1>
+  {% else %}
+    <h1>User Details</h1>
+  {% endif %}
+{% endblock %}
+
+{% block main %}
+<div class="module grid">
+  <h2>{{ user.uid }}</h2>
+  <span>Fingerprint: <pre class="fp">{{ print_fp(user.fingerprint) }}</pre></span>
+  {% if user.canaries %}
+    {% with count = user.canaries|count %}
+      <h3>
+      {% if count > 1 %}{{ count }} active canaries</h3>
+      {% else %} {{ count }} active canary</h3>
+      {% endif %}
+    {% endwith %}
+    <ul>
+    {% for canary in user.canaries|sort(attribute='date_posted', reverse=True) %}
+      <li>
+        <a href="{{ config.URL }}/canary/{{ canary.sigid_base64 }}">
+          Published: {{ canary.date_posted.strftime('%Y-%m-%d') }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <h3>No active canaries.</h3>
+  {% endif %}
+</div>
+{% endblock %}

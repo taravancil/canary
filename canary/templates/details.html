@@ -1,0 +1,50 @@
+<div class="module details rounded-subtle">
+  <h2>Details</h2>
+  <ul>
+    {% if not session.uid %}
+      <li>Published by
+        <a href="{{ config.URL }}/user/{{ canary.user.fingerprint }}"> {{ canary.user.uid }}</a>
+    </li>
+    <li>Key fingerprint: 
+      <pre class="fp">{{ print_fp(canary.user.fingerprint) }}</pre>
+    </li>
+    {% endif %}
+    <li>Created: 
+      <time datetime="{{ canary.date_posted }}">
+        {{ canary.date_posted.strftime('%Y-%m-%d') }}
+      </time>
+    </li>
+    <li>Last published: 
+      <time datetime="{{ canary.date_last_updated }}">
+        {{ canary.date_last_updated.strftime('%Y-%m-%d') }}
+      </time>
+      <span>
+      {% with days = time_since(canary.date_last_updated) %}
+        {% if days == 1 %}(1 day ago)
+        {% elif days < 30 and days > 1 %}({{ days }} days ago)
+        {% elif days >= 30 and days <= 90 %}({{ days // 7 }} weeks ago)
+        {% elif days > 90 %}{{ days // 30 }} months ago)
+        {% endif %}
+      {% endwith %}
+      </span>
+    </li>
+    <li>Published every
+      {% with freq = format_frequency(canary.frequency, canary.freq_type) %}
+        {% if freq != 1 %}
+          {{ freq }}
+          {{ canary.freq_type }}s</li>
+        {% else %}
+          {{ canary.freq_type }}</li>
+        {% endif %}
+      {% endwith %}
+      {% if canary.watchers %}
+        <li>{{ canary.watchers|count }} people watching this canary</li>
+      {% endif %}
+  </ul>
+  {% if not session.uid %}
+    <span>
+      <a href="{{ config.URL }}/login">Login to manage your canaries</a>
+      <a href="{{ config.URL }}/canary/{{ canary.sigid_base64 }}/watch">Watch this canary</a>
+    </span>
+  {% endif %}
+</div>

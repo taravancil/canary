@@ -1,0 +1,13 @@
+{% import "forms.html" as forms %}
+
+<div class="sidebar module rounded-subtle">
+  {% if session.uid %}
+    <a href="{{ config.URL }}/user/{{ session.fp }}">Manage Your Canaries</a>
+    <form name="logout" action="/logout" method="POST">
+      {{ forms.input('_csrf_token', value=csrf_token(), type='hidden') }} 
+      {{ forms.input('logout', value='Logout', type='submit', class='btn secondary')}}
+    </form>
+  {% else %}
+    <p><a href="{{ config.URL }}/login" class="session">Login</a> to manage your canaries.</p>
+  {% endif %}
+</div>

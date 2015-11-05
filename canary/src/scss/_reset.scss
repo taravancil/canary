@@ -1,0 +1,33 @@
+html {
+  box-sizing: border-box;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body, header, div, section, h1, h2, h3, h4, h5, ol, aside, textarea {
+  display: block;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+ul, ol {
+  padding: 0;
+  margin: 0;
+}
+
+pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+

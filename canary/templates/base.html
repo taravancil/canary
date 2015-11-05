@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}Canary{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+    <link href="{{ config.URL }}/static/css/style.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+  <main>
+
+  <div class="container">
+    {% block heading %}<h1>Canary</h1>{% endblock %}
+    
+  <div class="col-left rounded-subtle">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+          {% if category == 'error' %}
+            <li class="{{ category }} flash rounded-subtle" role="alert" aria-role="alert">
+              {{ message }}
+            </li>
+          {% else %}
+            <li class="{{ category }} flash rounded-subtle" aria-live="status polite">
+              {{ message }}
+            </li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    
+  {% block main %}{% endblock %}
+  </div> <!-- /.col-left -->
+  
+    <div class="sidebar col-right">
+      {% block sidebar %}
+        {% include "sidebar.html" %}
+      {% endblock %}
+      <ul class="links rounded-subtle">
+        <li><a href="{{ config.URL }}/about">About</a></li>
+        <li><a href="{{ config.URL }}/faq">FAQ</a></li>
+        <li><a href="{{ config.URL }}/canaries">Active Canaries</a></li> 
+        <li><a href="{{ config.URL }}/new">Publish a Canary</a></li>
+      </ul>
+      <div class="powered module rounded-subtle">
+        <p>Contribute on <a href="https://github.com/taravancil/canary">Github</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+  </main>
+  </body>
+</html>

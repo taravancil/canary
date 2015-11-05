@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% import "forms.html" as forms %}
+
+{% block title %}Watch This Canary{% endblock %}
+{% block heading %}<h1>Watch This Canary</h1>{% endblock %}
+{% block container %}<div class="container grid">{% endblock %}
+
+{% block main %}
+  <div class="module">
+    <p>Get alerts when this canary is republished, or when it isn't republished on time.</p>
+
+    <form name="watchCanary" action="{{ config.URL }}/canary/{{ canary.sigid_base64 }}/watch" method="POST">
+      {{ forms.input('_csrf_token', value=csrf_token(), type='hidden') }} 
+
+      {{ forms.label('email', value='Email Address') }}
+      {{ forms.input('email', type='email', attrs='required')}}
+      <fieldset class="rounded-subtle">
+        <legend>Remind me...</legend>
+        <p>
+          {{ forms.input('alerts', value='onPublish', type='checkbox') }}
+          {{ forms.label('alerts', value='Every time this canary is republished.') }}
+        </p>
+        <p>
+          {{ forms.input('alerts', value='onOverdue', type='checkbox') }}
+          {{ forms.label('alerts', value='When this canary is overdue by') }}
+
+          {{ forms.input('delay', type='number', attrs='min=1 max=100') }}
+          <select name="delayType">
+            <option value="day">Days</option> 
+            <option value="week" selected>Weeks</option>
+            <option value="month">Months</option>
+          </select>
+        </p>
+      </fieldset>
+      {{ forms.input('submit', type='submit', value='Submit', class='btn secondary right') }}
+    </form>
+  </div>
+{% endblock %}
+
+{% block sidebar %}
+  {% include "details.html" %}
+{% endblock %}

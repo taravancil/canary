@@ -1,0 +1,26 @@
+$theme-main: #ffcc33;
+$grey-base: #333;
+$white: #fafafa;
+
+$light-grey: mix($white, $grey-base, 20%);
+$lighter-grey: mix($white, $light-grey, 40%);
+$lightest-grey: mix($white, $lighter-grey, 75%);
+
+$dim-main: mix($white, $theme-main, 20%);
+$light-main: mix($white, $theme-main, 30%);
+$lighter-main: mix($white, $light-main, 55%);
+$lightest-main: mix($white, $lighter-main, 70%);
+
+$color-bg: darken($white, .5%);
+$color-copy: lighten($grey-base, 3%);
+$color-copy-accent: mix($color-copy, $theme-main, 10%);
+
+$color-error: #e3c2c1;
+$color-error-bg: #ffe9e7;
+$color-error-text: mix($color-copy, $color-error, 25%);
+$color-error-accent: mix($white, $color-error-text, 50%);
+$color-message: #64b1c5;
+$color-message-bg: mix($white, $color-message, 95%);
+$color-message-text: mix($color-copy, $color-message, 35%);
+$color-message-accent: mix($white, $color-message-text, 70%);
+

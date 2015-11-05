@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found{% endblock %}
+
+{% block container %}<div class="container grid">{% endblock %}
+
+{% block main %}
+    <div class="module">
+    <h2>404 - Page Not Found</h2>
+    <h3>Sorry, that page doesn't exist.</h3>
+      {% if urls %}
+        <h4>Try these instead:</h4>
+        <ul>
+        {% for url in urls[:5] %}
+          <li><a href="{{ config.URL }}/{{ type }}/{{ url}}">
+            {{ config.URL }}/{{ type }}/{{ url }}
+          </a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+{% endblock %}
